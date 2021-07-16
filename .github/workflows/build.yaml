@@ -65,10 +65,10 @@ jobs:
 
       - run: ./gradlew :quickjs:android:build :quickjs:android:assembleAndroidTest
 
-      - uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectedCheck
+      #- uses: reactivecircus/android-emulator-runner@v2
+      #  with:
+      #    api-level: 29
+      #    script: ./gradlew connectedCheck
 
   publish:
     runs-on: ubuntu-latest
@@ -103,13 +103,13 @@ jobs:
           if-no-files-found: error
 
       - run: ./gradlew publish
-        if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'cashapp/quickjs-java' }}
+        #if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'cashapp/quickjs-java' }}
         env:
           ORG_GRADLE_PROJECT_SONATYPE_NEXUS_USERNAME: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
           ORG_GRADLE_PROJECT_SONATYPE_NEXUS_PASSWORD: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
 
       - name: Deploy docs to website
-        if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'cashapp/quickjs-java' }}
+        #if: ${{ github.ref == 'refs/heads/trunk' && github.repository == 'cashapp/quickjs-java' }}
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
